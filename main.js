@@ -1,0 +1,89 @@
+let electron, {app, BrowserWindow} = require('electron');
+
+let path = require('path');
+let url = require('url');
+
+class GraphiQL_UI {
+    constructor(config = {}) {
+        this.config = Object.assign({
+            size: {
+                width: 800,
+                height: 600
+            }
+        }, config);
+    }
+
+    setup() {
+        // Slightly intelligent initial window sizing
+        let electronScreen = require('electron').screen;
+        let display = electronScreen.getPrimaryDisplay();
+        let defaultSize = {};
+        defaultSize.width = parseInt(display.size.width * (1 / 2));
+        defaultSize.width = defaultSize.width > 1600 ? 1600 : defaultSize.width;
+        defaultSize.height = parseInt(defaultSize.width * (3 / 4));
+        defaultSize.height = defaultSize.height > display.size.height ? display.size.height : defaultSize.height;
+
+        this.config.size = defaultSize;
+    }
+
+    createMainWindow() {
+        if(!('main' in this) || this.main === null) {
+            this.main = new BrowserWindow({
+                width: this.config.size.width,
+                height: this.config.size.height
+            });
+
+            this.main.on('closed', () => {
+                this.main = null;
+            });
+
+            this.loadMain();
+        }
+    }
+
+    loadMain() {
+        let mainURL = url.format({
+            pathname: path.join(__dirname, 'app', 'main.html'),
+            protocol: 'file:',
+            slashes: true
+        });
+
+        this.main.loadURL(mainURL);
+    }
+
+    run() {
+        app.on('ready', () => {
+            this.setup();
+            this.createMainWindow();
+        });
+
+        app.on('activate', () => {
+            this.createMainWindow();
+        });
+
+        app.on('window-all-closed', () => {
+            if(process.platform !== 'darwin') {
+                app.quit();
+            }
+        });
+    }
+}
+
+if(require.main === module) {
+    let config = {};
+
+    // For now, we won't use any config files
+    // We may in the future
+    //
+    // try {
+    //     config = require('./config.json');
+    // } catch(e) {
+    //     console.error('Config missing or invalid.');
+    //     process.exit(1);
+    // }
+
+    let main = new GraphiQL_UI();
+    main.run();
+} else {
+    console.error('This cannot be required');
+}

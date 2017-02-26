@@ -1,0 +1,42 @@
+@import "../../node_modules/graphiql/graphiql.css";
+
+html, body, #appMain {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#appMain {
+    .app {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        &-head {
+            flex: 0 0 100px;
+            display: flex;
+            flex-direction: row;
+
+            &-left {
+                flex: 1 1 auto;
+                padding: 5px;
+            }
+
+            &-right {
+                flex: 0 0 200px;
+                padding: 5px;
+            }
+        }
+
+        &-graphiql {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+
+            .graphiql-container {
+                flex: 1 1 auto;
+            }
+        }
+    }
+}
