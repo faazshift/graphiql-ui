@@ -1,6 +1,5 @@
 let React = require('react');
 let GraphiQL = require('graphiql');
-let fetch = require('isomorphic-fetch');
 
 let MaterialUI = require('material-ui');
 let MaterialStyles = require('material-ui/styles');
@@ -58,11 +57,10 @@ module.exports = class AppMain extends React.Component {
             }
         } else {
             fetchOpts.headers = {'Content-Type': 'application/json'};
-            window.haha = JSON.stringify(params);
             fetchOpts.body = JSON.stringify(params);
         }
 
-        return fetch(url, fetchOpts).then(response => response.json()).catch((err) => {
+        return window.fetch(url, fetchOpts).then(response => response.json()).catch((err) => {
             return 'Error! Please check the URL and try again!';
         });
     }

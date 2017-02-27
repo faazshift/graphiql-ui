@@ -1,4 +1,4 @@
-let electron, {app, BrowserWindow} = require('electron');
+let {app, session, BrowserWindow} = require('electron');
 
 let path = require('path');
 let url = require('url');
@@ -24,6 +24,14 @@ class GraphiQL_UI {
         defaultSize.height = defaultSize.height > display.size.height ? display.size.height : defaultSize.height;
 
         this.config.size = defaultSize;
+
+        // Disable pesky origin control for web requests
+        session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
+          if('Origin' in details.requestHeaders && details.requestHeaders['Origin'] == 'null') {
+            delete details.requestHeaders['Origin'];
+          }
+          callback({cancel: false, requestHeaders: details.requestHeaders});
+        });
     }
 
     createMainWindow() {
