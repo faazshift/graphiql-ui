@@ -7,6 +7,8 @@ class GraphiQL_UI {
     constructor(config = {}) {
         this.config = Object.assign({
             size: {
+                minWidth: 600,
+                minHeight: 500,
                 width: 800,
                 height: 600
             }
@@ -17,7 +19,10 @@ class GraphiQL_UI {
         // Slightly intelligent initial window sizing
         let electronScreen = require('electron').screen;
         let display = electronScreen.getPrimaryDisplay();
-        let defaultSize = {};
+        let defaultSize = {
+            minWidth: this.config.size.minWidth,
+            minHeight: this.config.size.minHeight
+        };
         defaultSize.width = parseInt(display.size.width * (1 / 2));
         defaultSize.width = defaultSize.width > 1600 ? 1600 : defaultSize.width;
         defaultSize.height = parseInt(defaultSize.width * (3 / 4));
@@ -37,8 +42,15 @@ class GraphiQL_UI {
     createMainWindow() {
         if(!('main' in this) || this.main === null) {
             this.main = new BrowserWindow({
+                show: false,
+                minWidth: this.config.size.minWidth,
+                minHeight: this.config.size.minHeight,
                 width: this.config.size.width,
                 height: this.config.size.height
+            });
+
+            this.main.once('ready-to-show', () => {
+                this.main.show();
             });
 
             this.main.on('closed', () => {

@@ -33,9 +33,17 @@ module.exports = class AppMain extends React.Component {
 
         this.storage = new StorageHelper('main');
 
+        let headers = [];
+        let headersStr = this.storage.get('headers');
+        if(headersStr !== null) {
+            headers = JSON.parse(headersStr);
+        }
+
         this.state = {
             url: this.storage.get('url') || '',
             method: this.storage.get('method') || 'post',
+            headers: headers,
+            status: 200
         };
     }
 
@@ -60,8 +68,11 @@ module.exports = class AppMain extends React.Component {
             fetchOpts.body = JSON.stringify(params);
         }
 
-        return window.fetch(url, fetchOpts).then(response => response.json()).catch((err) => {
-            return 'Error! Please check the URL and try again!';
+        return window.fetch(url, fetchOpts).then((response) => {
+            this.setState({status: response.status});
+            return response.json().catch((err) => {
+                throw "Not a JSON response! Do the URL and request method refer to a GraphQL endpoint?";
+            });
         });
     }
 
@@ -73,6 +84,15 @@ module.exports = class AppMain extends React.Component {
     handleMethodChange(ev, index, value) {
         this.storage.set('method', value);
         this.setState({method: value});
+    }
+
+    handleHeadersChange(ev, headers = []) {
+        this.storage.set('headers', JSON.stringify(headers));
+        this.setState({headers: headers});
+    }
+
+    handleHeadersButtonClick(ev) {
+        console.log('I was clicked!');
     }
 
     render() {
@@ -99,6 +119,15 @@ module.exports = class AppMain extends React.Component {
                                     onChange={this.handleURLChange.bind(this)}
                                 />
                             </MaterialStyles.MuiThemeProvider>
+                            <div className="headers">
+                                <MaterialStyles.MuiThemeProvider>
+                                    <MaterialUI.RaisedButton
+                                        label={`Headers (${(this.state.headers.length)})`}
+                                        primary={true}
+                                        onClick={this.handleHeadersButtonClick.bind(this)}
+                                    />
+                                </MaterialStyles.MuiThemeProvider>
+                            </div>
                         </div>
                     </div>
                     <div className="app-head-right">
@@ -114,6 +143,7 @@ module.exports = class AppMain extends React.Component {
                                 </MaterialUI.SelectField>
                             </MaterialStyles.MuiThemeProvider>
                         </div>
+                        {/*<div className="status">{`HTTP Status: ${this.state.status}`}</div>*/}
                     </div>
                 </div>
                 <div className="app-graphiql">

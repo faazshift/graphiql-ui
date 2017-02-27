@@ -1,5 +1,8 @@
 @import "../../node_modules/graphiql/graphiql.css";
 
+// Font for Material-UI elements
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+
 html, body, #appMain {
     margin: 0;
     padding: 0;
@@ -14,18 +17,18 @@ html, body, #appMain {
         flex-direction: column;
 
         &-head {
-            flex: 0 0 100px;
+            flex: 0 0 122px;
             display: flex;
             flex-direction: row;
 
             &-left {
                 flex: 1 1 auto;
-                padding: 5px;
+                padding: 0 5px;
             }
 
             &-right {
                 flex: 0 0 200px;
-                padding: 5px;
+                padding: 0 5px;
             }
         }
 
