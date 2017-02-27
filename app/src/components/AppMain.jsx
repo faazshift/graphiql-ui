@@ -50,7 +50,10 @@ module.exports = class AppMain extends React.Component {
     _fetch(params) {
         let url = this.state.url;
         let fetchOpts = {
-            method: this.state.method
+            method: this.state.method,
+            headers: {
+                'Accept': 'application/json',
+            }
         };
 
         if(this.state.method == 'get') {
@@ -64,7 +67,7 @@ module.exports = class AppMain extends React.Component {
                 url = `${url}?${(getParams.join('&'))}`;
             }
         } else {
-            fetchOpts.headers = {'Content-Type': 'application/json'};
+            fetchOpts.headers['Content-Type'] = 'application/json';
             fetchOpts.body = JSON.stringify(params);
         }
 

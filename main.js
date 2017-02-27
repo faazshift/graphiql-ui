@@ -32,10 +32,10 @@ class GraphiQL_UI {
 
         // Disable pesky origin control for web requests
         session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
-          if('Origin' in details.requestHeaders && details.requestHeaders['Origin'] == 'null') {
-            delete details.requestHeaders['Origin'];
-          }
-          callback({cancel: false, requestHeaders: details.requestHeaders});
+            if('Origin' in details.requestHeaders && details.requestHeaders['Origin'] == 'null') {
+                delete details.requestHeaders['Origin'];
+            }
+            callback({cancel: false, requestHeaders: details.requestHeaders});
         });
     }
 
