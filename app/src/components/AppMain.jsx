@@ -8,6 +8,8 @@ injectTapEventPlugin();
 
 let StorageHelper = require('../helpers/StorageHelper');
 
+let HeaderModal = require('./HeaderModal');
+
 // GraphiQL isolation wrapper component
 class GraphiQLWrapper extends React.Component {
     constructor(props) {
@@ -40,6 +42,7 @@ module.exports = class AppMain extends React.Component {
         }
 
         this.state = {
+            showHeaderModal: false,
             url: this.storage.get('url') || '',
             method: this.storage.get('method') || 'post',
             headers: headers,
@@ -47,13 +50,24 @@ module.exports = class AppMain extends React.Component {
         };
     }
 
+    _headerArrayToObject(headerArray = []) {
+        let obj = {};
+        headerArray.forEach((arrayObj) => {
+            if(arrayObj !== null && 'name' in arrayObj && arrayObj['name'].length > 0) {
+                obj[arrayObj['name'].toLowerCase()] = arrayObj['value'];
+            }
+        });
+
+        return obj;
+    }
+
     _fetch(params) {
         let url = this.state.url;
         let fetchOpts = {
             method: this.state.method,
-            headers: {
+            headers: Object.assign({
                 'Accept': 'application/json',
-            }
+            }, this._headerArrayToObject(this.state.headers)) // Mix in user supplied headers
         };
 
         if(this.state.method == 'get') {
@@ -89,13 +103,18 @@ module.exports = class AppMain extends React.Component {
         this.setState({method: value});
     }
 
-    handleHeadersChange(ev, headers = []) {
+    handleHeaderChange(headers = []) {
         this.storage.set('headers', JSON.stringify(headers));
         this.setState({headers: headers});
     }
 
-    handleHeadersButtonClick(ev) {
-        console.log('I was clicked!');
+    handleHeaderClear() {
+        this.storage.set('headers', JSON.stringify([]));
+        this.setState({headers: []});
+    }
+
+    toggleHeaderModal(value, ev) {
+        this.setState({showHeaderModal: value});
     }
 
     render() {
@@ -127,7 +146,15 @@ module.exports = class AppMain extends React.Component {
                                     <MaterialUI.RaisedButton
                                         label={`Headers (${(this.state.headers.length)})`}
                                         primary={true}
-                                        onClick={this.handleHeadersButtonClick.bind(this)}
+                                        onClick={this.toggleHeaderModal.bind(this, true)}
+                                    />
+                                </MaterialStyles.MuiThemeProvider>
+                                {' '}
+                                <MaterialStyles.MuiThemeProvider>
+                                    <MaterialUI.RaisedButton
+                                        label="Clear"
+                                        primary={true}
+                                        onClick={this.handleHeaderClear.bind(this)}
                                     />
                                 </MaterialStyles.MuiThemeProvider>
                             </div>
@@ -152,6 +179,12 @@ module.exports = class AppMain extends React.Component {
                 <div className="app-graphiql">
                     <GraphiQLWrapper fetcher={this._fetch.bind(this)} />
                 </div>
+                <HeaderModal
+                    show={this.state.showHeaderModal}
+                    headers={this.state.headers}
+                    onChange={this.handleHeaderChange.bind(this)}
+                    onClose={this.toggleHeaderModal.bind(this, false)}
+                />
             </div>
         );
     }
