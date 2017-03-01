@@ -6,7 +6,9 @@
   "scripts": {
     "start": "electron .",
     "build": "webpack",
-    "watch": "webpack -p --progress --watch"
+    "watch": "webpack -p --progress --watch",
+    "pack": "electron-packager . --out=./bin --overwrite --asar",
+    "release": "npm install && npm run build && npm run pack"
   },
   "repository": "https://github.com/faazshift/graphiql-ui",
   "keywords": [
@@ -30,6 +32,7 @@
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.23.0",
     "css-loader": "^0.26.2",
+    "electron-packager": "^8.5.2",
     "extract-text-webpack-plugin": "^2.0.0",
     "node-sass": "^4.5.0",
     "sass-loader": "^6.0.2",
