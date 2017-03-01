@@ -1,0 +1,13 @@
+environment:
+  nodejs_version: "7"
+
+platform:
+  - x64
+
+cache:
+  - node_modules
+  - '%APPDATA%\npm-cache'
+  - '%USERPROFILE%\.electron'
+
+build_script:
+  - npm run release

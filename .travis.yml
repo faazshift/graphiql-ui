@@ -10,7 +10,10 @@ node_js:
 
 cache:
   directories:
-    - "$HOME/.npm"
+  - node_modules
+  - $HOME/.electron
+  - $HOME/.cache
+  - $HOME/.npm
 
 script:
   - npm run release
