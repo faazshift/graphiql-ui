@@ -1,0 +1,13 @@
+os:
+  - linux
+
+sudo: false
+
+language: node_js
+
+cache:
+  directories:
+    - "$HOME/.npm"
+
+script:
+  - npm run release
