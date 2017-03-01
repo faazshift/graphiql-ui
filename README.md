@@ -1,5 +1,7 @@
 # graphiql-ui
 
+[![Build Status](https://travis-ci.org/faazshift/graphiql-ui.svg?branch=master)](https://travis-ci.org/faazshift/graphiql-ui)
+
 A minimal, electron-based, desktop user interface for the GraphiQL IDE
 
 # Quick Start Guide
