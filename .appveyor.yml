@@ -10,11 +10,9 @@ cache:
   - '%APPDATA%\npm-cache'
   - '%USERPROFILE%\.electron'
 
-test_script:
+install:
   - node --version
   - npm --version
-
-build_script:
   - npm run release
 
 matrix:
