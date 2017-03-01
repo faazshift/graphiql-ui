@@ -5,6 +5,9 @@ sudo: false
 
 language: node_js
 
+node_js:
+  - 7
+
 cache:
   directories:
     - "$HOME/.npm"
