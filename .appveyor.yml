@@ -16,5 +16,7 @@ install:
   - npm --version
   - npm run release
 
+build: off
+
 matrix:
   fast_finish: true
