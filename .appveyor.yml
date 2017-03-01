@@ -1,6 +1,6 @@
 environment:
   matrix:
-    - nodejs_version: "7.5.0"
+    - nodejs_version: "6"
 
 platform:
   - x64
@@ -10,5 +10,12 @@ cache:
   - '%APPDATA%\npm-cache'
   - '%USERPROFILE%\.electron'
 
+test_script:
+  - node --version
+  - npm --version
+
 build_script:
   - npm run release
+
+matrix:
+  fast_finish: true
