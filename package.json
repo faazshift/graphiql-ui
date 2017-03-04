@@ -1,6 +1,6 @@
 {
   "name": "graphiql-ui",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "A minimal, electron-based, desktop user interface for the GraphiQL IDE",
   "main": "main.js",
   "scripts": {
