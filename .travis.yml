@@ -15,15 +15,17 @@ cache:
   - $HOME/.cache
   - $HOME/.npm
 
-script:
+install:
   - npm run release
-  - cd release && tar -zcvf graphiql-ui-linux-x64.tar.gz graphiql-ui-linux-x64 && cd ..
+  - ls .
+  - ls release
+  - tar -zcvf graphiql-ui-linux-x64.tar.gz -C release graphiql-ui-linux-x64
 
 deploy:
   provider: releases
   api_key:
     secure: "j3a/uHyUgL3ob6bp4rfbrGIAeTA9mU7hYrgXvNKIPG6Dk4v0glJFqsoAERqVA/thrS6gm7Fuiu2YVvVF2dOp9fqJKdZPj/RX5RF39eDxVaJG0ZeD1bMu3GwgZFRWP1QPLhh+px22sF72By+NzokRQlm8sgdAgfjGOVJPtAMVH9aoiDY86o3FdZoEnzaIa8Tc6hXoMp94Cr8ImVuVkIf7ZvkgEFVSYdT5axGyvIOzoLVUpsn2xEcpprx314nnCX1KngVNBAE0XXKNvCFVwLimIFjDL5etESoSqkNFgfaNLAid63QrEzDn6NqDd2i6YAaQW5Pt5LRoMuVKI+htWoswrcHqkqIEMKkZFedou+SejA9tG1Fd0g347Tb7+hpsDnFCwWB8QyZ44f/j+8j6fqR+vdTQxnosNy6vvdLlBH/Rsuu7gbX7zxv1pnJzzy68aEWgnkZTF32NiIokyI8R26354A2wqA86pyDFAscu3e+CsE2Vob19S/TpplQZG65G6193qEzjgy1g48bkIbEwgTjf6ZlPpJxl/DNGTbX/4K7czqGzeD3L6tUUlha3/R6MRNkrZn9Lzv4pVLgfXL/PtAiQMAiSAjE0fDC4DBe75+5W0MEbCyfyRhMbtJ4ja36QtN3EYa0kp5ck4lYmFRB7UCNde6Di1TncI1Co4QZHY7tXvic="
-  file: "release/graphiql-ui-linux-x64.tar.gz"
+  file: "graphiql-ui-linux-x64.tar.gz"
   skip_cleanup: true
   on:
     tags: true
