@@ -18,8 +18,8 @@ cache:
 install:
   - npm run release
   - ls .
-  - ls release
-  - tar -zcvf graphiql-ui-linux-x64.tar.gz -C release graphiql-ui-linux-x64
+  - ls bin
+  - tar -zcvf graphiql-ui-linux-x64.tar.gz -C bin graphiql-ui-linux-x64
 
 deploy:
   provider: releases
