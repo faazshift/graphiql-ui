@@ -3,7 +3,8 @@ version: "{build}"
 max_jobs: 2
 
 environment:
-  - nodejs_version: "7"
+  matrix:
+    - nodejs_version: "7"
 
 platform: x64
 
