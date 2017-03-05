@@ -16,7 +16,7 @@ cache:
   - $HOME/.npm
 
 install:
-  - npm run release
+  - npm run release64
   - ls .
   - ls bin
   - tar -zcvf graphiql-ui-linux-x64.tar.gz -C bin graphiql-ui-linux-x64

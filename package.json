@@ -8,7 +8,11 @@
     "build": "webpack",
     "watch": "webpack -p --progress --watch",
     "pack": "electron-packager . --out=./bin --overwrite --asar",
-    "release": "npm install && npm run build && npm run pack"
+    "pack32": "electron-packager . --out=./bin --arch=ia32 --overwrite --asar",
+    "pack64": "electron-packager . --out=./bin --arch=x64 --overwrite --asar",
+    "release": "npm install && npm run build && npm run pack",
+    "release32": "npm install && npm run build && npm run pack32",
+    "release64": "npm install && npm run build && npm run pack64"
   },
   "repository": "https://github.com/faazshift/graphiql-ui",
   "keywords": [

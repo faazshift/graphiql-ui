@@ -17,7 +17,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - node --version
   - npm --version
-  - npm run release
+  - npm run release64
   - dir
   - dir bin
   - 7z a graphiql-ui-win32-x64.zip %APPVEYOR_BUILD_FOLDER%\bin\graphiql-ui-win32-x64
