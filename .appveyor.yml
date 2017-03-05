@@ -24,6 +24,10 @@ install:
 
 build: off
 
+artifacts:
+  - path: graphiql-ui-win32-x64.zip
+    name: graphiql-ui-win32-x64
+
 deploy:
   provider: GitHub
   auth_token:
