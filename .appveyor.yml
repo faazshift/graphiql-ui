@@ -15,8 +15,20 @@ install:
   - node --version
   - npm --version
   - npm run release
+  - dir
+  - dir bin
+  - 7z a graphiql-ui-win32-x64.zip %APPVEYOR_BUILD_FOLDER%\bin\graphiql-ui-win32-x64
 
 build: off
+
+deploy:
+  - provider: GitHub
+    artifact: graphiql-ui-win32-x64.zip
+    draft: false
+    prerelease: false
+    on:
+      branch: master
+      appveyor_repo_tag: true
 
 matrix:
   fast_finish: true
