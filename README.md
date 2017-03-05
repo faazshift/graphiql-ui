@@ -3,11 +3,15 @@
 [![Build Status](https://travis-ci.org/faazshift/graphiql-ui.svg?branch=master)](https://travis-ci.org/faazshift/graphiql-ui)
 [![Build status](https://ci.appveyor.com/api/projects/status/j4tqlfkg9i9r43pw?svg=true)](https://ci.appveyor.com/project/faazshift/graphiql-ui)
 
-A minimal, electron-based, desktop user interface for the GraphiQL IDE
+A minimal, electron-based desktop user interface for the GraphiQL IDE
+
+# Downloads
+
+For 64-bit Windows and Linux, there are prebuilt packages attached to the releases on Github. See [this](https://github.com/faazshift/graphiql-ui/releases) page. Download the appropriate release for your platform, extract it where you'd like, optionally create a symlink/shortcut to the executable, and enjoy.
+
+For other platforms, use the guide below to get started.
 
 # Quick Start Guide
-
-Currently there are no installers. You will have to install the package manually. However, it's pretty quick and simple to do so:
 
 1. Download the code:
     * GitHub: `$ git clone https://github.com/faazshift/graphiql-ui.git && cd graphiql-ui`
@@ -19,4 +23,4 @@ Currently there are no installers. You will have to install the package manually
 4. Create a symlink:
     * `$ ln -s /opt/graphiql-ui/graphiql-ui /usr/local/bin/graphiql-ui`
 
-This app was developed on Linux, and has only been tested on that platform. However, it should build and run on OS X and Windows.
+This app was developed on Linux. However, it should build and run on OS X and Windows.
