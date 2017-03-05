@@ -25,13 +25,15 @@ install:
 build: off
 
 deploy:
-  - provider: GitHub
-    artifact: graphiql-ui-win32-x64.zip
-    draft: false
-    prerelease: false
-    on:
-      branch: master
-      appveyor_repo_tag: true
+  provider: GitHub
+  auth_token:
+    secure: /9iHt8AO1AhdftYpcP2AVW88/FL1kpc7rsruJV5woXpAkQmAm4pg0eNn5qI3iOk3
+  description: ''
+  artifact: graphiql-ui-win32-x64.zip
+  draft: false
+  prerelease: false
+  on:
+    appveyor_repo_tag: true
 
 matrix:
   fast_finish: true
